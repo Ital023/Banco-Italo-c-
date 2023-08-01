@@ -1,4 +1,6 @@
-﻿List<string> usuarios = new List<string>();
+﻿//List<string> usuarios = new List<string>();
+int i = 0;
+Dictionary<string,int> clientes = new Dictionary<string,int>();
 
 exibirMenu();
 
@@ -40,24 +42,16 @@ void exibirMenu()
 
         switch (opcaoNumerica)
         {
-            case 1:
+            case 1:registrarUsuario();
                 limparConsole();
-                astec();
-                Console.WriteLine("REGISTRO USUARIO");
-                astec();
-                string nome = inputUser();
-                registrarUsuario(nome);
                 break;
-
-            case 2:
+            /*case 2:
                 string nomeR = inputUser();
                 RemoverUsuario(nomeR);
-                break;
+                break;*/
             case 4:
                 limparConsole();
-                astec();
-                Console.WriteLine("Registro usuario");
-                astec();
+                
                 exibirUsuarios();
                 break;
             case 5:
@@ -73,22 +67,21 @@ void exibirMenu()
 
 }
 
-string inputUser()
-{
-    Console.Write("Insira o usuario: ");
-    string nomeRemover = Console.ReadLine();
-    
-    return nomeRemover;
-} 
-
-
-void registrarUsuario(string usuario)
+void registrarUsuario()
 {
     limparConsole();
-    usuarios.Add(usuario);
+    astec();
+    Console.WriteLine("REGISTRO USUARIO");
+    astec();
+
+    Console.Write("Insira o nome do usuario: ");
+    string nome = Console.ReadLine();
+
+    clientes.Add(nome, i);
+    i++;
 }
 
-void RemoverUsuario(string nomeRemover)
+/*void RemoverUsuario(string nomeRemover)
 {
     limparConsole();
     foreach (string usuario in usuarios)
@@ -98,9 +91,9 @@ void RemoverUsuario(string nomeRemover)
             usuarios.Remove(usuario);
         }
     }
-}
+}*/
 
-void alterarUsuario(string usuario)
+/*void alterarUsuario(string usuario)
 {
     limparConsole();
     string novoUser = inputUser();
@@ -114,7 +107,7 @@ void alterarUsuario(string usuario)
         }
     }
     i++;
-}
+}*/
 
 void exibirUsuarios()
 {
@@ -128,7 +121,7 @@ void exibirUsuarios()
 
 
     int i = 0;
-        foreach (string usuario in usuarios)
+        foreach (string usuario in clientes.Keys)
         {
             Console.WriteLine("\nID: " + i + " Nome: " + usuario);
             i++;
