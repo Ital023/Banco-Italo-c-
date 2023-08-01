@@ -41,6 +41,10 @@ void exibirMenu()
         switch (opcaoNumerica)
         {
             case 1:
+                limparConsole();
+                astec();
+                Console.WriteLine("REGISTRO USUARIO");
+                astec();
                 string nome = inputUser();
                 registrarUsuario(nome);
                 break;
@@ -50,12 +54,11 @@ void exibirMenu()
                 RemoverUsuario(nomeR);
                 break;
             case 4:
-                int i = 0;
-                foreach(string usuario in usuarios)
-                {
-                    Console.WriteLine("\nID: "+ i + " Nome: " + usuario);
-                    i++;
-                }
+                limparConsole();
+                astec();
+                Console.WriteLine("Registro usuario");
+                astec();
+                exibirUsuarios();
                 break;
             case 5:
                 limparConsole();
@@ -74,21 +77,23 @@ string inputUser()
 {
     Console.Write("Insira o usuario: ");
     string nomeRemover = Console.ReadLine();
-
+    
     return nomeRemover;
 } 
 
 
 void registrarUsuario(string usuario)
 {
+    limparConsole();
     usuarios.Add(usuario);
 }
 
 void RemoverUsuario(string nomeRemover)
 {
+    limparConsole();
     foreach (string usuario in usuarios)
     {
-        if (nomeRemover.Equals(usuario))
+        if (usuario.Equals(nomeRemover))
         {
             usuarios.Remove(usuario);
         }
@@ -97,6 +102,7 @@ void RemoverUsuario(string nomeRemover)
 
 void alterarUsuario(string usuario)
 {
+    limparConsole();
     string novoUser = inputUser();
     int i = 0;
 
@@ -110,8 +116,38 @@ void alterarUsuario(string usuario)
     i++;
 }
 
+void exibirUsuarios()
+{
+        string frase = "Exibindo todas os usuarios registrados";
+        string fraseUP = frase.ToUpper();
+
+        limparConsole();
+        astec();
+        Console.WriteLine(fraseUP);
+        astec();
+
+
+    int i = 0;
+        foreach (string usuario in usuarios)
+        {
+            Console.WriteLine("\nID: " + i + " Nome: " + usuario);
+            i++;
+        }
+
+        Console.WriteLine("\nDigite uma tecla para voltar ao menu principal");
+        Console.ReadKey();
+        limparConsole();
+        exibirMenu();
+    
+}
+
 
 void limparConsole()
 {
     Console.Clear();
+}
+
+void astec()
+{
+    Console.WriteLine("************************************");
 }
