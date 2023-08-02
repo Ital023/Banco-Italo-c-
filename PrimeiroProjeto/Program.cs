@@ -1,6 +1,9 @@
 ﻿//List<string> usuarios = new List<string>();
 int i = 0;
 Dictionary<string,int> clientes = new Dictionary<string,int>();
+clientes.Add("Italo", 1000);
+clientes.Add("Caio", 4500);
+clientes.Add("Guilherme", 6200);
 
 exibirMenu();
 
@@ -32,9 +35,7 @@ void exibirMenu()
 
         Console.WriteLine("\nDigite 1 para cadastrar usuario");
         Console.WriteLine("Digite 2 para remover usuario");
-        Console.WriteLine("Digite 3 para alterar usuario");
-        Console.WriteLine("Digite 4 para exibir usuarios");
-        Console.WriteLine("Digite 5 para limpar console");
+        Console.WriteLine("Digite 3 para exibir usuarios");
         Console.WriteLine("Digite -1 para sair");
         Console.Write("\nInsira o numero: ");
         string opcao = Console.ReadLine();
@@ -45,19 +46,12 @@ void exibirMenu()
             case 1:registrarUsuario();
                 limparConsole();
                 break;
-            /*case 2:
-                string nomeR = inputUser();
-                RemoverUsuario(nomeR);
-                break;*/
-            case 4:
+            case 2:RemoverUsuario();
+                break;
+            case 3:
                 limparConsole();
-                
                 exibirUsuarios();
                 break;
-            case 5:
-                limparConsole();
-                break;
-
             case -1:
                 Environment.Exit(0);
                 break;
@@ -81,34 +75,35 @@ void registrarUsuario()
     i++;
 }
 
-/*void RemoverUsuario(string nomeRemover)
+void RemoverUsuario()
 {
     limparConsole();
-    foreach (string usuario in usuarios)
+    astec();
+    Console.WriteLine("REMOVER USUARIO");
+    astec();
+
+    Console.Write("Insira o nome do usuario: ");
+    string nome = Console.ReadLine()!;
+
+    if (!clientes.ContainsKey(nome))
     {
-        if (usuario.Equals(nomeRemover))
-        {
-            usuarios.Remove(usuario);
-        }
+        Console.WriteLine($"\nO cliente {nome} não foi encontrada!");
+        Console.WriteLine("Digite uma tecla para voltar ao menu principal");
+        Console.ReadKey();
+        Console.Clear();
+        exibirMenu();
     }
-}*/
-
-/*void alterarUsuario(string usuario)
-{
-    limparConsole();
-    string novoUser = inputUser();
-    int i = 0;
-
-    foreach(string user in usuarios)
+    else
     {
-        if (usuarios.Equals(usuario))
-        {
-            usuarios[i] = novoUser;
-        }
+        Console.WriteLine($"\nO cliente {nome} está sendo deletado!");
+        Thread.Sleep(4000);
+        clientes.Remove(nome);
+        Console.WriteLine($"O cliente {nome} foi deletado!");
+        Thread.Sleep(4000);
+        limparConsole();
+        exibirMenu();
     }
-    i++;
-}*/
-
+}
 void exibirUsuarios()
 {
         string frase = "Exibindo todas os usuarios registrados";
@@ -121,9 +116,9 @@ void exibirUsuarios()
 
 
     int i = 0;
-        foreach (string usuario in clientes.Keys)
+        foreach (var usuario in clientes)
         {
-            Console.WriteLine("\nID: " + i + " Nome: " + usuario);
+            Console.WriteLine($"ID: {i} | Nome: {usuario.Key} | Valor: {usuario.Value}");
             i++;
         }
 
