@@ -1,11 +1,5 @@
 ﻿using PrimeiroProjeto.Modelos;
-Banco bancoItalo = new Banco("Italo");
-Cliente cliente1 = new Cliente(1,"Italo",1500);
-Cliente cliente2 = new Cliente(2, "Guigui", 12500);
-bancoItalo.adicionarCliente(cliente1);
-bancoItalo.adicionarCliente(cliente2);
-
-
+Banco bancoItalo = new Banco("Banco do Italo");
 
 exibirMenu();
 
@@ -33,6 +27,7 @@ void exibirMenu()
 
     while (menuTemp != -1)
     {
+        limparConsole();
         exibirHeader();
 
         Console.WriteLine("\nDigite 1 para cadastrar usuario");
@@ -45,11 +40,64 @@ void exibirMenu()
 
         switch (opcaoNumerica)
         {
+            case 1:
+                Cliente cliente = gerarCliente();
+                bancoItalo.adicionarCliente(cliente);
+                tempoEspera();
+                break;
+            case 2:
+                string nome = capturarNome();
+                Cliente cliente2 = bancoItalo.procurarCliente(nome);
+                bancoItalo.removerCliente(cliente2);
+                tempoEspera();
+                break;
             case 3:
-                bancoItalo.visualizarClientes(); 
+                bancoItalo.visualizarClientes();
+                tempoEspera();
+                break;
+            case -1:
+                Environment.Exit(0);
                 break;
 
         }
     }
 
+}
+
+int varID(Banco banco)
+{
+    int i = 0;
+    foreach (var cliente in banco.clientes)
+    {
+        i++;
+    }
+    return i;
+}
+
+string capturarNome()
+{
+    Console.Write("Insira o nome: ");
+    string nome = Console.ReadLine()!;
+
+    return nome;
+}
+
+Cliente gerarCliente()
+{
+    Console.Write("Insira o nome: ");
+    string nome = Console.ReadLine()!;
+
+    Cliente cliente = new Cliente(varID(bancoItalo),nome,0);
+    
+    return cliente;
+}
+
+void limparConsole()
+{
+    Console.Clear();
+}
+
+void tempoEspera()
+{
+    Thread.Sleep(5000);
 }

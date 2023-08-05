@@ -35,4 +35,8 @@ class Banco
     {
         clientes.Add(cliente);
     }
+    public void removerCliente(Cliente cliente)
+    {
+        clientes.Remove(cliente);
+    }
 }
