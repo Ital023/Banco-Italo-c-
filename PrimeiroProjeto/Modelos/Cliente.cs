@@ -1,8 +1,8 @@
 ﻿namespace PrimeiroProjeto.Modelos;
 class Cliente
 {
-    private int id { get; }
-    private string nome { get; }
+    private int id { get; set; }
+    private string nome { get; set; }
     private double saldo { get; set; }
     public Cliente(int id, string nome, double saldo)
     {
@@ -43,6 +43,10 @@ class Cliente
         return saldo;
     }
 
-    
+    public string setNome(string nomeNovo)
+    {
+        return nome = nomeNovo;
+    }
+
 
 }

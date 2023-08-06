@@ -1,9 +1,9 @@
 ﻿using PrimeiroProjeto.Modelos;
-
 internal class Program
 {
     private static void Main(string[] args)
     {
+
         Banco bancoItalo = new Banco("Banco do Italo");
 
         exibirMenu();
@@ -36,7 +36,8 @@ internal class Program
 
                 Console.WriteLine("\nDigite 1 para cadastrar usuario");
                 Console.WriteLine("Digite 2 para remover usuario");
-                Console.WriteLine("Digite 3 para exibir usuarios");
+                Console.WriteLine("Digite 3 para alterar usuario");
+                Console.WriteLine("Digite 4 para exibir usuarios");
                 Console.WriteLine("Digite -1 para sair");
                 Console.Write("\nInsira o numero: ");
                 string opcao = Console.ReadLine();
@@ -45,17 +46,24 @@ internal class Program
                 switch (opcaoNumerica)
                 {
                     case 1:
-                        Cliente cliente = gerarCliente();
+                        Cliente cliente = bancoItalo.gerarCliente(bancoItalo);
                         bancoItalo.adicionarCliente(cliente);
                         tempoEspera();
                         break;
                     case 2:
-                        string nome = capturarNome();
-                        Cliente cliente2 = bancoItalo.procurarCliente(nome);
+                        string nome2 = capturarNome();
+                        Cliente cliente2 = bancoItalo.procurarCliente(nome2);
                         bancoItalo.removerCliente(cliente2);
                         tempoEspera();
                         break;
                     case 3:
+                        string nome3 = capturarNome();
+                        Console.WriteLine("Insira o nome novo: ");
+                        string nomeNovo = Console.ReadLine()!;
+                        bancoItalo.alterarCliente(nome3,nomeNovo);
+                        tempoEspera();
+                        break;
+                    case 4:
                         bancoItalo.visualizarClientes();
                         tempoEspera();
                         break;
@@ -68,15 +76,7 @@ internal class Program
 
         }
 
-        int varID(Banco banco)
-        {
-            int i = 0;
-            foreach (var cliente in banco.clientes)
-            {
-                i++;
-            }
-            return i;
-        }
+        
 
         string capturarNome()
         {
@@ -86,16 +86,6 @@ internal class Program
             return nome;
         }
 
-        Cliente gerarCliente()
-        {
-            Console.Write("Insira o nome: ");
-            string nome = Console.ReadLine()!;
-
-            Cliente cliente = new Cliente(varID(bancoItalo), nome, 0);
-
-            return cliente;
-        }
-
         void limparConsole()
         {
             Console.Clear();
@@ -103,7 +93,7 @@ internal class Program
 
         void tempoEspera()
         {
-            Thread.Sleep(5000);
+            Thread.Sleep(3000);
         }
     }
 }

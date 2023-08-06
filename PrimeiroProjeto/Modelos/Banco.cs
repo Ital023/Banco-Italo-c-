@@ -39,4 +39,35 @@ class Banco
     {
         clientes.Remove(cliente);
     }
+    public void alterarCliente(string nome,string nomeNovo)
+    {
+        foreach(var pessoa in clientes)
+        {
+            if (pessoa.getNome().Equals(nome))
+            {
+                pessoa.setNome(nomeNovo);
+                Console.WriteLine("Nome alterado!");
+            }
+        } 
+    }
+
+    public int varID(Banco banco)
+    {
+        int i = 0;
+        foreach (var cliente in banco.clientes)
+        {
+            i++;
+        }
+        return i;
+    }
+
+    public Cliente gerarCliente(Banco bancoItalo)
+    {
+        Console.Write("Insira o nome: ");
+        string nome = Console.ReadLine()!;
+
+        Cliente cliente = new Cliente(varID(bancoItalo), nome, 0);
+
+        return cliente;
+    }
 }
