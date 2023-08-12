@@ -71,7 +71,7 @@ internal class Program
 
         void exibirMenuAdm()
         {
-            Console.WriteLine("Insira a senha do adm: ");
+            Console.Write("Insira a senha do adm: ");
             string senha = Console.ReadLine()!;
 
             if (bancoItalo.varAdm(senha))
@@ -132,11 +132,11 @@ internal class Program
         {
             int menuTemp = 0;
 
-            Console.WriteLine("Insira o cpf: ");
+            Console.Write("Insira o cpf: ");
             string cpf = Console.ReadLine();
             int cpfNumerica = int.Parse(cpf);
 
-            Console.WriteLine("Insira a senha: ");
+            Console.Write("Insira a senha: ");
             string senha = Console.ReadLine()!;
 
             if (bancoItalo.varCliente(cpfNumerica, senha))
@@ -158,13 +158,17 @@ internal class Program
                     switch (opcaoNumerica)
                     {
                         case 1:
-                            
+                            Console.Write("Quanto deseja depositar: ");
+                            int valorDepositar = int.Parse(Console.ReadLine());
+                            bancoItalo.setSaldoByCpf(cpfNumerica, valorDepositar, 1);
                             break;
                         case 2:
-                            exibirMenuAdm();
+                            Console.Write("Quanto deseja sacar: ");
+                            int valorSacar = int.Parse(Console.ReadLine());
+                            bancoItalo.setSaldoByCpf(cpfNumerica, valorSacar, 2);
                             break;
                         case -1:
-                            Environment.Exit(0);
+                            menuTemp = -1;
                             break;
                     }
 

@@ -126,16 +126,16 @@ class Banco
         return null;
     }
 
-    public void setSaldoByCpf(int cpf,double saldo,string opcao)
+    public void setSaldoByCpf(int cpf,double saldo,int opcao)
     {
         foreach( var cliente in clientes)
         {
             if (cliente.getCpf() == cpf)
             {
-                if (opcao.Equals("depositar"))
+                if (opcao == 1)
                 {
                     cliente.depositar(saldo);
-                }else if (opcao.Equals("saque"))
+                }else if (opcao == 2)
                 {
                     cliente.sacar(saldo);
                 }

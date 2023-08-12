@@ -17,12 +17,22 @@ class Cliente : Pessoa
 
     public void depositar(double valor)
     {
-        saldo -= valor;
+        saldo += valor;
     }
     
     public void sacar(double valor)
     {
-        saldo += valor;
+        if(saldo < valor)
+        {
+            Console.WriteLine("saldo insuficiente");
+            Thread.Sleep(3000);
+        }
+        else
+        {
+            saldo -= valor;
+
+        }
+
     }
 
     
