@@ -1,4 +1,5 @@
-﻿namespace PrimeiroProjeto.Modelos;
+﻿using PrimeiroProjeto.Funcoes;
+namespace PrimeiroProjeto.Modelos;
 
 class Banco
 {
@@ -16,10 +17,14 @@ class Banco
 
     public void visualizarClientes()
     {
+        Console.WriteLine();
         foreach (var cliente in clientes)
         {
             Console.WriteLine($"Id: {cliente.getId()}| Nome: {cliente.getNome()}| Saldo: {cliente.getSaldo()}| Cpf: {cliente.getCpf()}");
         }
+        Console.WriteLine();
+        Console.WriteLine("Pressiona qualquer tecla para sair");
+        Console.ReadKey();
     }
 
     public Cliente procurarCliente(string nome)

@@ -6,7 +6,7 @@ internal class FuncoesMain
     {
     }
 
-    public string capturarNome()
+    public static string capturarNome()
     {
         Console.Write("Insira o nome: ");
         string nome = Console.ReadLine()!;
@@ -14,12 +14,12 @@ internal class FuncoesMain
         return nome;
     }
 
-    public void limparConsole()
+    public static void limparConsole()
     {
         Console.Clear();
     }
 
-    public void tempoEspera()
+    public static void tempoEspera()
     {
         Thread.Sleep(3000);
     }

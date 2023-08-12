@@ -6,7 +6,6 @@ internal class Program
     {
 
         Banco bancoItalo = new Banco("Banco do Italo");
-        FuncoesMain funcoes = new FuncoesMain();
         Cliente cliente1 = new Cliente("Italo", 20, 0, "1111");
         Cliente cliente2 = new Cliente("Cadu", 24, 1, "2424");
         Cliente cliente3 = new Cliente("Cuberto", 999, 2, "mesmo");
@@ -44,7 +43,7 @@ internal class Program
             while (menuTempMenu != -1)
             {
 
-                funcoes.limparConsole();
+                FuncoesMain.limparConsole();
                 exibirHeader();
 
                 Console.WriteLine("\nDigite 1 para ir a area do cliente");
@@ -81,7 +80,7 @@ internal class Program
 
                 while (menuTemp != -1)
                 {
-                    funcoes.limparConsole();
+                    FuncoesMain.limparConsole();
                     exibirHeader();
 
                     Console.WriteLine("\nDigite 1 para cadastrar usuario");
@@ -98,24 +97,26 @@ internal class Program
                         case 1:
                             Cliente cliente = bancoItalo.gerarCliente(bancoItalo);
                             bancoItalo.adicionarCliente(cliente);
-                            funcoes.tempoEspera();
+                            FuncoesMain.tempoEspera();
                             break;
                         case 2:
-                            string nome2 = funcoes.capturarNome();
+                            string nome2 = FuncoesMain.capturarNome();
                             Cliente cliente2 = bancoItalo.procurarCliente(nome2);
                             bancoItalo.removerCliente(cliente2);
-                            funcoes.tempoEspera();
+                            FuncoesMain.tempoEspera();
                             break;
                         case 3:
-                            string nome3 = funcoes.capturarNome();
-                            Console.WriteLine("Insira o nome novo: ");
+                            string nome3 = FuncoesMain.capturarNome();
+                            Console.Write("Insira o nome novo: ");
                             string nomeNovo = Console.ReadLine()!;
                             bancoItalo.alterarCliente(nome3, nomeNovo);
-                            funcoes.tempoEspera();
+                            FuncoesMain.tempoEspera();
                             break;
                         case 4:
+                            FuncoesMain.limparConsole();
+                            exibirHeader();
                             bancoItalo.visualizarClientes();
-                            funcoes.tempoEspera();
+                            
                             break;
                         case -1:
                             menuTemp = -1;
@@ -144,7 +145,7 @@ internal class Program
             {
                 while (menuTemp != -1)
                 {
-                    funcoes.limparConsole();
+                    FuncoesMain.limparConsole();
                     exibirHeader();
 
                     Console.WriteLine("\nBem vindo de volta ao banco cliente " + bancoItalo.getNomeByCpf(cpfNumerica));
@@ -179,7 +180,7 @@ internal class Program
                             pix.realizarPix(bancoItalo, cpfNumerica, cpfDest, valorPix);
 
                             Console.WriteLine("Pix realizado com sucesso!");
-                            funcoes.tempoEspera();
+                            FuncoesMain.tempoEspera();
                             break;
                         case -1:
                             menuTemp = -1;
