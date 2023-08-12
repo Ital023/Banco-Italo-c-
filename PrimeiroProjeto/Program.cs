@@ -10,6 +10,7 @@ internal class Program
         Cliente cliente1 = new Cliente("Italo", 20, 0, "1111");
         Cliente cliente2 = new Cliente("Cadu", 24, 1, "2424");
         Cliente cliente3 = new Cliente("Cuberto", 999, 2, "mesmo");
+        Pix pix = new Pix();
         bancoItalo.adicionarCliente(cliente1);
         bancoItalo.adicionarCliente(cliente2);
         bancoItalo.adicionarCliente(cliente3);
@@ -150,6 +151,7 @@ internal class Program
                     Console.WriteLine();
                     Console.WriteLine("\nDigite 1 para depositar");
                     Console.WriteLine("Digite 2 para sacar");
+                    Console.WriteLine("Digite 3 para ir a area PIX");
                     Console.WriteLine("Digite -1 para voltar");
                     Console.Write("\nInsira o numero: ");
                     string opcao = Console.ReadLine();
@@ -166,6 +168,18 @@ internal class Program
                             Console.Write("Quanto deseja sacar: ");
                             int valorSacar = int.Parse(Console.ReadLine());
                             bancoItalo.setSaldoByCpf(cpfNumerica, valorSacar, 2);
+                            break;
+                        case 3:
+                            Console.Write("Insira o valor do Pix: ");
+                            double valorPix = double.Parse(Console.ReadLine());
+
+                            Console.Write("Insira o cpf do destinatario: ");
+                            int cpfDest = int.Parse(Console.ReadLine());
+
+                            pix.realizarPix(bancoItalo, cpfNumerica, cpfDest, valorPix);
+
+                            Console.WriteLine("Pix realizado com sucesso!");
+                            funcoes.tempoEspera();
                             break;
                         case -1:
                             menuTemp = -1;
