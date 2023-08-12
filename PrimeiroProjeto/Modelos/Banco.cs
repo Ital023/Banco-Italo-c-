@@ -6,6 +6,9 @@ class Banco
 
     public List<Cliente> clientes = new List<Cliente>();
 
+    Adm admItalo = new Adm("Italo", "italo", "0000");
+
+
     public Banco(string nome)
     {
         this.nome = nome;
@@ -15,7 +18,7 @@ class Banco
     {
         foreach (var cliente in clientes)
         {
-            Console.WriteLine($"Id: {cliente.getId()}| Nome: {cliente.getNome()}| Saldo: {cliente.getSaldo()}");
+            Console.WriteLine($"Id: {cliente.getId()}| Nome: {cliente.getNome()}| Saldo: {cliente.getSaldo()}| Cpf: {cliente.getCpf()}");
         }
     }
 
@@ -66,8 +69,78 @@ class Banco
         Console.Write("Insira o nome: ");
         string nome = Console.ReadLine()!;
 
-        Cliente cliente = new Cliente(varID(bancoItalo), nome, 0);
+        Console.WriteLine("Insira o cpf: ");
+        string cpf = Console.ReadLine();
+        int cpfNumerica = int.Parse(cpf);
+
+        Console.Write("Insira sua senha: ");
+        string senha = Console.ReadLine()!;
+
+        Cliente cliente = new Cliente(nome,cpfNumerica,varID(bancoItalo), senha);
 
         return cliente;
     }
+
+    public bool varCliente(int cpf, string senha)
+    {
+        foreach(var cliente in clientes)
+        {
+            if (cliente.getCpf() == cpf)
+            {
+                if (cliente.getSenha().Equals(senha))
+                {
+                    return true;
+                }
+                else
+                {
+                    return false;
+                }
+            }
+        }
+        Console.WriteLine("Usuario não encontrado!");
+        Thread.Sleep(3000);
+        return false;
+    }
+
+    public bool varAdm(string senhaTry)
+    {
+        if (admItalo.getSenha().Equals(senhaTry))
+        {
+            return true;
+        }
+        else
+        {
+            return false;
+        }
+    }
+
+    public string getNomeByCpf(int cpf)
+    {
+        foreach (var cliente in clientes)
+        {
+            if(cliente.getCpf() == cpf)
+            {
+                return cliente.getNome();
+            }
+        }
+        return null;
+    }
+
+    public void setSaldoByCpf(int cpf,double saldo,string opcao)
+    {
+        foreach( var cliente in clientes)
+        {
+            if (cliente.getCpf() == cpf)
+            {
+                if (opcao.Equals("depositar"))
+                {
+                    cliente.depositar(saldo);
+                }else if (opcao.Equals("saque"))
+                {
+                    cliente.sacar(saldo);
+                }
+            }
+        }
+    }
+
 }

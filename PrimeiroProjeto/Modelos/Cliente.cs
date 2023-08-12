@@ -1,15 +1,19 @@
 ﻿namespace PrimeiroProjeto.Modelos;
-class Cliente
+class Cliente : Pessoa
 {
-    private int id { get; set; }
-    private string nome { get; set; }
-    private double saldo { get; set; }
-    public Cliente(int id, string nome, double saldo)
+    public Cliente(string nome,int cpf,int id,string senha)
     {
         this.id = id;
-        this.nome = nome;
-        this.saldo = saldo;
+        setNome(nome);
+        setCpf(cpf);
+        this.senha = senha;
+
     }
+
+    private int id { get; set; }
+    private double saldo { get; set; }
+    private string senha { get; set; }
+    
 
     public void depositar(double valor)
     {
@@ -22,16 +26,15 @@ class Cliente
     }
 
     
+
+
     /*public void transferir(double valor,Cliente pessoa,Banco banco)
     {
         banco.clientes();
         foreach (var  in banco) { }
     }*/
 
-    public string getNome()
-    {
-        return nome;
-    }
+
 
     public int getId()
     {
@@ -43,10 +46,12 @@ class Cliente
         return saldo;
     }
 
-    public string setNome(string nomeNovo)
+    public string getSenha()
     {
-        return nome = nomeNovo;
+        return senha;
     }
+
+    
 
 
 }
