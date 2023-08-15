@@ -85,8 +85,8 @@ internal class Program
 
                     Console.WriteLine("\nDigite 1 para cadastrar usuario");
                     Console.WriteLine("Digite 2 para remover usuario");
-                    Console.WriteLine("Digite 3 para alterar usuario");
-                    Console.WriteLine("Digite 4 para exibir usuarios");
+                    //Console.WriteLine("Digite 3 para alterar usuario");
+                    Console.WriteLine("Digite 3 para exibir usuarios");
                     Console.WriteLine("Digite -1 para voltar");
                     Console.Write("\nInsira o numero: ");
                     string opcao = Console.ReadLine();
@@ -105,14 +105,14 @@ internal class Program
                             bancoItalo.removerCliente(cliente2);
                             FuncoesMain.tempoEspera();
                             break;
+                        //case 3:
+                        //    string nome3 = FuncoesMain.capturarNome();
+                        //    Console.Write("Insira o nome novo: ");
+                        //    string nomeNovo = Console.ReadLine()!;
+                        //    bancoItalo.alterarCliente(nome3, nomeNovo);
+                        //    FuncoesMain.tempoEspera();
+                        //    break;
                         case 3:
-                            string nome3 = FuncoesMain.capturarNome();
-                            Console.Write("Insira o nome novo: ");
-                            string nomeNovo = Console.ReadLine()!;
-                            bancoItalo.alterarCliente(nome3, nomeNovo);
-                            FuncoesMain.tempoEspera();
-                            break;
-                        case 4:
                             FuncoesMain.limparConsole();
                             exibirHeader();
                             bancoItalo.visualizarClientes();

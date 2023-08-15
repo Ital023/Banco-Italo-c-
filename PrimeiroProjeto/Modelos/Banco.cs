@@ -47,17 +47,17 @@ class Banco
     {
         clientes.Remove(cliente);
     }
-    public void alterarCliente(string nome,string nomeNovo)
-    {
-        foreach(var pessoa in clientes)
-        {
-            if (pessoa.getNome().Equals(nome))
-            {
-                pessoa.setNome(nomeNovo);
-                Console.WriteLine("Nome alterado!");
-            }
-        } 
-    }
+    //public void alterarCliente(string nome,string nomeNovo)
+    //{
+    //    foreach(var pessoa in clientes)
+    //    {
+    //        if (pessoa.getNome().Equals(nome))
+    //        {
+    //            pessoa.setNome(nomeNovo);
+    //            Console.WriteLine("Nome alterado!");
+    //        }
+    //    } 
+    //}
 
     public int varID(Banco banco)
     {
