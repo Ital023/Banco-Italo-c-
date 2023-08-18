@@ -15,10 +15,10 @@ internal class Pessoa
         return Cpf;
     }
 
-    /*public string setNome(string nomeNovo)
+    public string setNome(string nomeNovo)
     {
         return Nome = nomeNovo;
-    }*/
+    }
 
     public int setCpf(int cpf)
     {

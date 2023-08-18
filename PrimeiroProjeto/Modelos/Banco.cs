@@ -27,11 +27,23 @@ class Banco
         Console.ReadKey();
     }
 
-    public Cliente procurarCliente(string nome)
+    public Cliente procurarClienteNome(string nome)
     {
         foreach (var cliente in clientes)
         {
             if (cliente.getNome().Equals(nome))
+            {
+                return cliente;
+            }
+        }
+        return null;
+    }
+
+    public Cliente procurarClienteCpf(int cpf)
+    {
+        foreach (var cliente in clientes)
+        {
+            if (cliente.getCpf() == cpf)
             {
                 return cliente;
             }
@@ -129,6 +141,18 @@ class Banco
             }
         }
         return null;
+    }
+
+    public double getSaldoByCpf(int cpf)
+    {
+        foreach (var cliente in clientes)
+        {
+            if (cliente.getCpf() == cpf)
+            {
+                return cliente.getSaldo();
+            }
+        }
+        return -1;
     }
 
     public void setSaldoByCpf(int cpf,double saldo,int opcao)

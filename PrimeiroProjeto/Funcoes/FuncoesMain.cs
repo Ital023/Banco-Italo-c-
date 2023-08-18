@@ -6,6 +6,12 @@ internal class FuncoesMain
     {
     }
 
+    public static int capturarCpf()
+    {
+        Console.Write("Insira o cpf: ");
+        return int.Parse(Console.ReadLine());
+    }
+
     public static string capturarNome()
     {
         Console.Write("Insira o nome: ");

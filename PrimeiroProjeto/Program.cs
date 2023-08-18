@@ -100,9 +100,10 @@ internal class Program
                             FuncoesMain.tempoEspera();
                             break;
                         case 2:
-                            string nome2 = FuncoesMain.capturarNome();
-                            Cliente cliente2 = bancoItalo.procurarCliente(nome2);
+                            int cpf2 = FuncoesMain.capturarCpf();
+                            Cliente cliente2 = bancoItalo.procurarClienteCpf(cpf2);
                             bancoItalo.removerCliente(cliente2);
+                            Console.WriteLine("\nCliente removido!");
                             FuncoesMain.tempoEspera();
                             break;
                         //case 3:
@@ -149,6 +150,7 @@ internal class Program
                     exibirHeader();
 
                     Console.WriteLine("\nBem vindo de volta ao banco cliente " + bancoItalo.getNomeByCpf(cpfNumerica));
+                    Console.WriteLine("Seu saldo atual: " + bancoItalo.getSaldoByCpf(cpfNumerica));
                     Console.WriteLine();
                     Console.WriteLine("\nDigite 1 para depositar");
                     Console.WriteLine("Digite 2 para sacar");
