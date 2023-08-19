@@ -1,7 +1,7 @@
 ﻿namespace PrimeiroProjeto.Modelos;
 class Cliente : Pessoa
 {
-    public Cliente(string nome,int cpf,int id,string senha)
+    public Cliente(string nome, int cpf, int id, string senha)
     {
         this.id = id;
         setNome(nome);
@@ -13,16 +13,16 @@ class Cliente : Pessoa
     private int id { get; set; }
     private double saldo { get; set; }
     private string senha { get; set; }
-    
+
 
     public void depositar(double valor)
     {
         saldo += valor;
     }
-    
+
     public void sacar(double valor)
     {
-        if(saldo < valor)
+        if (saldo < valor)
         {
             Console.WriteLine("saldo insuficiente");
             Thread.Sleep(3000);
@@ -34,18 +34,6 @@ class Cliente : Pessoa
         }
 
     }
-
-    
-
-
-    /*public void transferir(double valor,Cliente pessoa,Banco banco)
-    {
-        banco.clientes();
-        foreach (var  in banco) { }
-    }*/
-
-
-
     public int getId()
     {
         return id;
@@ -61,7 +49,7 @@ class Cliente : Pessoa
         return senha;
     }
 
-    
+
 
 
 }
