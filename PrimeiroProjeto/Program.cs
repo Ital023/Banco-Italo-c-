@@ -8,14 +8,9 @@ internal class Program
     {
 
         Banco bancoItalo = new Banco("Banco do Italo");
-        Cliente cliente1 = new Cliente("Italo", 20, 0, "1111");
-        Cliente cliente2 = new Cliente("Cadu", 24, 1, "2424");
-        Cliente cliente3 = new Cliente("Cuberto", 999, 2, "mesmo");
         Pix pix = new Pix();
-        bancoItalo.adicionarCliente(cliente1);
-        bancoItalo.adicionarCliente(cliente2);
-        bancoItalo.adicionarCliente(cliente3);
-
+        FluxoDeArquivo fluxoDeArquivo = new FluxoDeArquivo();
+        fluxoDeArquivo.abrirArquivoEmostrarArquivos(bancoItalo);
 
         exibirMenu();
 
@@ -122,11 +117,7 @@ internal class Program
                             bancoItalo.visualizarClientes();
                             break;
                         case 4:
-                            FluxoDeArquivo fluxoDeArquivo = new FluxoDeArquivo();
-                            fluxoDeArquivo.abrirArquivoEmostrarArquivos();
-                            Console.WriteLine("\n\nPressiona qualquer tecla para sair");
-                            Console.ReadKey();
-                            FuncoesMain.limparConsole();
+                            
                             break;
                         case -1:
                             menuTemp = -1;
@@ -149,9 +140,10 @@ internal class Program
             int cpfNumerica = int.Parse(cpf);
 
             Console.Write("Insira a senha: ");
-            string senha = Console.ReadLine()!;
+            string senha = Console.ReadLine();
+            int senhaNumerica = int.Parse(senha);
 
-            if (bancoItalo.varCliente(cpfNumerica, senha))
+            if (bancoItalo.varCliente(cpfNumerica, senhaNumerica))
             {
                 while (menuTemp != -1)
                 {
@@ -173,12 +165,12 @@ internal class Program
                     {
                         case 1:
                             Console.Write("Quanto deseja depositar: ");
-                            int valorDepositar = int.Parse(Console.ReadLine());
+                            double valorDepositar = double.Parse(Console.ReadLine());
                             bancoItalo.setSaldoByCpf(cpfNumerica, valorDepositar, 1);
                             break;
                         case 2:
                             Console.Write("Quanto deseja sacar: ");
-                            int valorSacar = int.Parse(Console.ReadLine());
+                            double valorSacar = double.Parse(Console.ReadLine());
                             bancoItalo.setSaldoByCpf(cpfNumerica, valorSacar, 2);
                             break;
                         case 3:

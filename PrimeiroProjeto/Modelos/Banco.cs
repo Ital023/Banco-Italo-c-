@@ -20,7 +20,7 @@ class Banco
         Console.WriteLine();
         foreach (var cliente in clientes)
         {
-            Console.WriteLine($"Id: {cliente.getId()}| Nome: {cliente.getNome()}| Saldo: {cliente.getSaldo()}| Cpf: {cliente.getCpf()}");
+            Console.WriteLine($"Nome:{cliente.getNome()}| Saldo:{cliente.getSaldo()}| Cpf:{cliente.getCpf()}| Senha:{cliente.getSenha()}");
         }
         Console.WriteLine();
         Console.WriteLine("Pressiona qualquer tecla para sair");
@@ -91,20 +91,20 @@ class Banco
         int cpfNumerica = int.Parse(cpf);
 
         Console.Write("Insira sua senha: ");
-        string senha = Console.ReadLine()!;
+        int senha = int.Parse(Console.ReadLine()!);
 
-        Cliente cliente = new Cliente(nome,cpfNumerica,varID(bancoItalo), senha);
+        Cliente cliente = new Cliente(nome,cpfNumerica,senha);
 
         return cliente;
     }
 
-    public bool varCliente(int cpf, string senha)
+    public bool varCliente(int cpf, int senha)
     {
         foreach(var cliente in clientes)
         {
             if (cliente.getCpf() == cpf)
             {
-                if (cliente.getSenha().Equals(senha))
+                if (cliente.getSenha() == senha)
                 {
                     return true;
                 }

@@ -1,4 +1,6 @@
-﻿using System.Text;
+﻿using PrimeiroProjeto.Modelos;
+using System.Text;
+using static System.Runtime.InteropServices.JavaScript.JSType;
 
 namespace PrimeiroProjeto.BancoDeDados;
 
@@ -6,40 +8,41 @@ internal class FluxoDeArquivo
 {
     Arquivo arquivo = new Arquivo("contas.txt");
 
-    public void abrirArquivoEmostrarArquivos()
+    public void abrirArquivoEmostrarArquivos(Banco banco)
     {
-        using(var FluxosDeArquivo = new FileStream(arquivo.getLocalArquivo(), FileMode.Open))
+        using (var FluxosDeArquivo = new FileStream(arquivo.getLocalArquivo(), FileMode.Open))
         {
-            var numeroDeBytesLidos = -1;
+            var leitor = new StreamReader(FluxosDeArquivo);
 
-            var buffer = new byte[1024]; //1kb
-
-
-            //Fluxo de dados
-            while (numeroDeBytesLidos != 0)
+            while(!leitor.EndOfStream)
             {
-                numeroDeBytesLidos = FluxosDeArquivo.Read(buffer, 0, 1024);
-                EscreverBuffer(buffer, numeroDeBytesLidos);
-            }
+                var linha = leitor.ReadLine();  
 
-            FluxosDeArquivo.Close();
+
+                var cliente = ConverterStringParaConta(linha);
+
+
+                banco.adicionarCliente(cliente);
+            }
         }
     }
 
-    public static void EscreverBuffer(byte[] buffer, int bytesLidos)
+    public Cliente ConverterStringParaConta(string linha)
     {
-        //traduzindo para codigo byte em txt normal
-        var utf8 = new UTF8Encoding();
+        var campos = linha.Split(",");
 
-        var texto = utf8.GetString(buffer, 0, bytesLidos);
+        var cpf = campos[0];
+        var senha = campos[1];
+        var saldo = campos[2].Replace(".",",");
+        var nome = campos[3];
 
-        Console.Write(texto);
+        int cpfComInt = int.Parse(cpf);
+        int senhaComInt = int.Parse(senha);
+        double saldoComDouble = double.Parse(saldo);
+
+        Cliente cliente = new Cliente(nome,cpfComInt,senhaComInt);
+        cliente.depositar(saldoComDouble);
+
+        return cliente;
     }
-
-    public void exibirArquivo()
-    {
-        Console.WriteLine("Local do arquivo -> " + arquivo.getLocalArquivo());
-
-    }
-
 }
