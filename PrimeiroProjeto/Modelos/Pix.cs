@@ -1,18 +1,29 @@
 ﻿namespace PrimeiroProjeto.Modelos;
 internal class Pix
 {
-    public void realizarPix(Banco banco,int cpfRemetente,int cpfDestinatario,double valor)
+    public void realizarPix(Banco banco,Cliente clienteRemetente,Cliente clienteDestinatario,double valor)
     {
-        foreach(var clienteRemetente in banco.clientes)
+        foreach(var Remetente in banco.clientes)
         {
-            if(clienteRemetente.getCpf() == cpfRemetente)
+            if(Remetente.getCpf() == clienteRemetente.getCpf())
             {
-                foreach(var clienteDestinatario in banco.clientes)
+                foreach(var Destinatario in banco.clientes)
                 {
-                    if(clienteDestinatario.getCpf() == cpfDestinatario)
+                    if(Destinatario.getCpf() == clienteDestinatario.getCpf())
                     {
-                        clienteRemetente.sacar(valor);
-                        clienteDestinatario.depositar(valor);
+                        if(clienteRemetente.getSaldo() >= valor)
+                        {
+                            Remetente.sacarPix(valor);
+                            Destinatario.depositarPix(valor);
+                            clienteDestinatario.transacoes.Add($"Pix de R${valor} recebido da pessoa: {clienteRemetente.getNome()}");
+                            clienteRemetente.transacoes.Add($"Pix de R${valor} depositado para a pessoa: {clienteDestinatario.getNome()}");
+                            Console.WriteLine("Pix realizado com sucesso!");
+                        }
+                        else
+                        {
+                            Console.WriteLine("Valor indisponivel para transferencia PIX!");
+                        }
+                        
                     }
                     
                 }

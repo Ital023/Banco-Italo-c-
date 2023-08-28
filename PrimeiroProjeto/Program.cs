@@ -84,7 +84,6 @@ internal class Program
                     Console.WriteLine("Digite 2 para remover usuario");
                     //Console.WriteLine("Digite 3 para alterar usuario");
                     Console.WriteLine("Digite 3 para exibir usuarios");
-                    Console.WriteLine("Digite 4 para teste bd");
                     Console.WriteLine("Digite -1 para voltar");
                     Console.Write("\nInsira o numero: ");
                     string opcao = Console.ReadLine();
@@ -116,9 +115,6 @@ internal class Program
                             exibirHeader();
                             bancoItalo.visualizarClientes();
                             break;
-                        case 4:
-                            
-                            break;
                         case -1:
                             menuTemp = -1;
                             break;
@@ -139,65 +135,78 @@ internal class Program
             string cpf = Console.ReadLine();
             int cpfNumerica = int.Parse(cpf);
 
-            Console.Write("Insira a senha: ");
-            string senha = Console.ReadLine();
-            int senhaNumerica = int.Parse(senha);
-
-            if (bancoItalo.varCliente(cpfNumerica, senhaNumerica))
+            if (!bancoItalo.varCPF(cpfNumerica))
             {
-                while (menuTemp != -1)
-                {
-                    FuncoesMain.limparConsole();
-                    exibirHeader();
-
-                    Console.WriteLine("\nBem vindo de volta ao banco cliente " + bancoItalo.getNomeByCpf(cpfNumerica));
-                    Console.WriteLine("Seu saldo atual: " + bancoItalo.getSaldoByCpf(cpfNumerica));
-                    Console.WriteLine();
-                    Console.WriteLine("\nDigite 1 para depositar");
-                    Console.WriteLine("Digite 2 para sacar");
-                    Console.WriteLine("Digite 3 para ir a area PIX");
-                    Console.WriteLine("Digite -1 para voltar");
-                    Console.Write("\nInsira o numero: ");
-                    string opcao = Console.ReadLine();
-                    int opcaoNumerica = int.Parse(opcao);
-
-                    switch (opcaoNumerica)
-                    {
-                        case 1:
-                            Console.Write("Quanto deseja depositar: ");
-                            double valorDepositar = double.Parse(Console.ReadLine());
-                            bancoItalo.setSaldoByCpf(cpfNumerica, valorDepositar, 1);
-                            break;
-                        case 2:
-                            Console.Write("Quanto deseja sacar: ");
-                            double valorSacar = double.Parse(Console.ReadLine());
-                            bancoItalo.setSaldoByCpf(cpfNumerica, valorSacar, 2);
-                            break;
-                        case 3:
-                            Console.Write("Insira o valor do Pix: ");
-                            double valorPix = double.Parse(Console.ReadLine());
-
-                            Console.Write("Insira o cpf do destinatario: ");
-                            int cpfDest = int.Parse(Console.ReadLine());
-
-                            pix.realizarPix(bancoItalo, cpfNumerica, cpfDest, valorPix);
-
-                            Console.WriteLine("Pix realizado com sucesso!");
-                            FuncoesMain.tempoEspera();
-                            break;
-                        case -1:
-                            menuTemp = -1;
-                            break;
-                    }
-
-                }
+                Console.WriteLine("Cpf não encontrado!");
             }
             else
             {
-                Console.WriteLine("Falha ao acessar o usuario");
-            }
+                Console.Write("Insira a senha: ");
+                string senha = Console.ReadLine();
+                int senhaNumerica = int.Parse(senha);
 
-            
+                if (bancoItalo.varCliente(cpfNumerica, senhaNumerica))
+                {
+                    while (menuTemp != -1)
+                    {
+                        FuncoesMain.limparConsole();
+                        exibirHeader();
+
+                        Console.WriteLine("\nBem vindo de volta ao banco cliente " + bancoItalo.getNomeByCpf(cpfNumerica));
+                        Console.WriteLine("Seu saldo atual: " + bancoItalo.getSaldoByCpf(cpfNumerica));
+                        Console.WriteLine();
+                        Cliente clienteTransacao = bancoItalo.getCliente(cpfNumerica);
+                        Console.WriteLine("Historico de transacoes: ");
+                        clienteTransacao.visualizarTransacoes();
+                        Console.WriteLine();
+                        Console.WriteLine("\nDigite 1 para depositar");
+                        Console.WriteLine("Digite 2 para sacar");
+                        Console.WriteLine("Digite 3 para ir a area PIX");
+                        Console.WriteLine("Digite -1 para voltar");
+                        Console.Write("\nInsira o numero: ");
+                        string opcao = Console.ReadLine();
+                        int opcaoNumerica = int.Parse(opcao);
+
+                        
+
+                        switch (opcaoNumerica)
+                        {
+                            case 1:
+                                Console.Write("Quanto deseja depositar: ");
+                                double valorDepositar = double.Parse(Console.ReadLine());
+                                bancoItalo.setSaldoByCpf(cpfNumerica, valorDepositar, 1);
+                                break;
+                            case 2:
+                                Console.Write("Quanto deseja sacar: ");
+                                double valorSacar = double.Parse(Console.ReadLine());
+                                bancoItalo.setSaldoByCpf(cpfNumerica, valorSacar, 2);
+                                break;
+                            case 3:
+                                Console.Write("Insira o valor do Pix: ");
+                                double valorPix = double.Parse(Console.ReadLine());
+
+                                Console.Write("Insira o cpf do destinatario: ");
+                                int cpfDest = int.Parse(Console.ReadLine());
+
+                                Cliente clienteRemet = bancoItalo.getCliente(cpfNumerica);
+                                Cliente clienteDest = bancoItalo.getCliente(cpfDest);
+
+                                pix.realizarPix(bancoItalo, clienteRemet, clienteDest, valorPix);
+
+                                FuncoesMain.tempoEspera();
+                                break;
+                            case -1:
+                                menuTemp = -1;
+                                break;
+                        }
+
+                    }
+                }
+                else
+                {
+                    Console.WriteLine("Falha ao acessar o usuario");
+                }
+            }
         }
     }
 }

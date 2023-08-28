@@ -10,10 +10,13 @@ class Cliente : Pessoa
     private double saldo { get; set; }
     private int senha { get; set; }
 
+    public List<string> transacoes = new List<string>();
+
 
     public void depositar(double valor)
     {
         saldo += valor;
+        transacoes.Add($"Depositado o valor: " + valor);
     }
 
     public void sacar(double valor)
@@ -26,7 +29,26 @@ class Cliente : Pessoa
         else
         {
             saldo -= valor;
+            transacoes.Add($"Sacado o valor: "+ valor);
+        }
 
+    }
+
+    public void depositarPix(double valor)
+    {
+        saldo += valor;
+    }
+
+    public void sacarPix(double valor)
+    {
+        if (saldo < valor)
+        {
+            Console.WriteLine("saldo insuficiente");
+            Thread.Sleep(3000);
+        }
+        else
+        {
+            saldo -= valor;
         }
 
     }
@@ -40,7 +62,13 @@ class Cliente : Pessoa
         return senha;
     }
 
-
+    public void visualizarTransacoes()
+    {
+        foreach(string transacao in transacoes)
+        {
+            Console.WriteLine(transacao);
+        }
+    }
 
 
 }

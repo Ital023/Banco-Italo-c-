@@ -71,14 +71,28 @@ class Banco
     //    } 
     //}
 
-    public int varID(Banco banco)
+    public bool varCPF(int cpf)
     {
-        int i = 0;
-        foreach (var cliente in banco.clientes)
+        foreach (var cliente in clientes)
         {
-            i++;
+            if (cliente.getCpf() == cpf)
+            {
+                return true;
+            }
         }
-        return i;
+        return false;
+    }
+
+    public Cliente getCliente(int cpf)
+    {
+        foreach(var cliente in clientes)
+        {
+            if(cliente.getCpf() == cpf)
+            {
+                return cliente;
+            }
+        }
+        return null;
     }
 
     public Cliente gerarCliente(Banco bancoItalo)
