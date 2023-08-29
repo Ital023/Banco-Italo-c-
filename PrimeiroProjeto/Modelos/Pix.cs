@@ -13,11 +13,13 @@ internal class Pix
                     {
                         if(clienteRemetente.getSaldo() >= valor)
                         {
+                            DateTime horaAtual = DateTime.Now;
+
                             Remetente.sacarPix(valor);
                             Destinatario.depositarPix(valor);
-                            clienteDestinatario.transacoes.Add($"Pix de R${valor} recebido da pessoa: {clienteRemetente.getNome()}");
-                            clienteRemetente.transacoes.Add($"Pix de R${valor} depositado para a pessoa: {clienteDestinatario.getNome()}");
-                            Console.WriteLine("Pix realizado com sucesso!");
+                            clienteDestinatario.transacoes.Add($"Pix de R${valor} recebido da pessoa: {clienteRemetente.getNome()} as {horaAtual.ToLocalTime()}");
+                            clienteRemetente.transacoes.Add($"Pix de R${valor} depositado para a pessoa: {clienteDestinatario.getNome()} as {horaAtual.ToLocalTime()}");
+                            Console.WriteLine($"Pix realizado com sucesso para {clienteDestinatario.getNome()}!");
                         }
                         else
                         {

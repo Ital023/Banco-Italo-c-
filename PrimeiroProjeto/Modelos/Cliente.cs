@@ -1,22 +1,44 @@
 ﻿namespace PrimeiroProjeto.Modelos;
 class Cliente : Pessoa
 {
-    public Cliente(string nome, int cpf,int senha)
+    public Cliente(string nome, int cpf, int senha)
     {
         setNome(nome);
         setCpf(cpf);
         this.senha = senha;
     }
+    public Cliente(string nome, int cpf,int senha,double valor)
+    {
+        setNome(nome);
+        setCpf(cpf);
+        this.senha = senha;
+        depositar(valor);
+    }
+
     private double saldo { get; set; }
     private int senha { get; set; }
 
     public List<string> transacoes = new List<string>();
 
+    
+
 
     public void depositar(double valor)
     {
-        saldo += valor;
-        transacoes.Add($"Depositado o valor: " + valor);
+        if(transacoes.Count == 0)
+        {
+            saldo += valor;
+            transacoes.Add("");
+
+        }
+        else
+        {
+            DateTime horaAtual = DateTime.Now;
+
+            saldo += valor;
+            transacoes.Add($"Depositado o valor: R${valor} as {horaAtual.ToLocalTime()}");
+        }
+        
     }
 
     public void sacar(double valor)
@@ -28,8 +50,9 @@ class Cliente : Pessoa
         }
         else
         {
+            DateTime horaAtual = DateTime.Now;
             saldo -= valor;
-            transacoes.Add($"Sacado o valor: "+ valor);
+            transacoes.Add($"Sacado o valor: R${valor} as {horaAtual.ToLocalTime()}");
         }
 
     }

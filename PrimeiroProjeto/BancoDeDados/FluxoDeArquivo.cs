@@ -40,8 +40,7 @@ internal class FluxoDeArquivo
         int senhaComInt = int.Parse(senha);
         double saldoComDouble = double.Parse(saldo);
 
-        Cliente cliente = new Cliente(nome,cpfComInt,senhaComInt);
-        cliente.depositar(saldoComDouble);
+        Cliente cliente = new Cliente(nome,cpfComInt,senhaComInt,saldoComDouble);
 
         return cliente;
     }

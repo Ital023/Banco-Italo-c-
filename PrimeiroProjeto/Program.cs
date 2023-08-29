@@ -153,7 +153,7 @@ internal class Program
                         exibirHeader();
 
                         Console.WriteLine("\nBem vindo de volta ao banco cliente " + bancoItalo.getNomeByCpf(cpfNumerica));
-                        Console.WriteLine("Seu saldo atual: " + bancoItalo.getSaldoByCpf(cpfNumerica));
+                        Console.WriteLine("Seu saldo atual: R$" + bancoItalo.getSaldoByCpf(cpfNumerica));
                         Console.WriteLine();
                         Cliente clienteTransacao = bancoItalo.getCliente(cpfNumerica);
                         Console.WriteLine("Historico de transacoes: ");
