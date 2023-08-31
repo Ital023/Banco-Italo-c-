@@ -7,10 +7,13 @@ internal class Program
     private static void Main(string[] args)
     {
         Arquivo arquivo = new Arquivo("contas.txt");
+        Arquivo transferArq = new Arquivo("transferenciasContas.txt");
         Banco bancoItalo = new Banco("Banco do Italo");
         Pix pix = new Pix();
         FluxoDeArquivo fluxoDeArquivo = new FluxoDeArquivo();
         fluxoDeArquivo.abrirArquivoEmostrarArquivos(bancoItalo,arquivo);
+        FluxoTransferencias fluxoTransferencias = new FluxoTransferencias();
+        fluxoTransferencias.abrirArquivoEmostrarTransferencias(bancoItalo, transferArq);   
         
 
 
