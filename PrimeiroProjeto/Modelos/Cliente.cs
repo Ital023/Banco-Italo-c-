@@ -93,5 +93,15 @@ class Cliente : Pessoa
         }
     }
 
+    public int getNumTransacoes()
+    {
+        int i = 0;
+
+        while(i < transacoes.Count)
+        {
+            i++;
+        }
+        return i;
+    }
 
 }
