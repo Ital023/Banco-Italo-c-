@@ -30,6 +30,8 @@ internal class FluxoTransferencias
         //Thread.Sleep(1000);
         int i = 1;
 
+
+
         foreach (var cliente in banco.clientes)
         {
             if(cpfNumerico == cliente.getCpf())
@@ -45,8 +47,10 @@ internal class FluxoTransferencias
                     Thread.Sleep(2000);
 
                     string valorSemSinal = valor.Substring(1);
-                    //Console.WriteLine(valorSemSinal);
-                    //Thread.Sleep(5000);
+                    string valorReal = valorSemSinal.Split(" ")[0];
+                    string data = valorSemSinal.Split(" ")[1];
+                    string hora = valorSemSinal.Split(" ")[2];
+                   
 
                     if (sinal == '+')
                     {
@@ -54,7 +58,7 @@ internal class FluxoTransferencias
                         Thread.Sleep(2000);
 
                         DateTime horaAtual = DateTime.Now;
-                        cliente.transacoes.Add($"Depositado o valor: R${valorSemSinal} as {horaAtual.ToLocalTime()}");
+                        cliente.transacoes.Add($"Depositado o valor: R${valorReal} as {data} {hora}");
                     }
                     else if (sinal == '-')
                     {
@@ -62,7 +66,7 @@ internal class FluxoTransferencias
                         Thread.Sleep(2000);
 
                         DateTime horaAtual = DateTime.Now;
-                        cliente.transacoes.Add($"Sacado o valor: R${valorSemSinal} as {horaAtual.ToLocalTime()}");
+                        cliente.transacoes.Add($"Sacado o valor: R${valorReal} as {data} {hora}");
                     }
                     i++;
                 }
