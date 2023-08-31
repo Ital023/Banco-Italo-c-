@@ -6,9 +6,8 @@ namespace PrimeiroProjeto.BancoDeDados;
 
 internal class FluxoDeArquivo
 {
-    Arquivo arquivo = new Arquivo("contas.txt");
 
-    public void abrirArquivoEmostrarArquivos(Banco banco)
+    public void abrirArquivoEmostrarArquivos(Banco banco,Arquivo arquivo)
     {
         using (var FluxosDeArquivo = new FileStream(arquivo.getLocalArquivo(), FileMode.Open))
         {

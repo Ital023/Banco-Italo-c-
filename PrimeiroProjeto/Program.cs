@@ -6,11 +6,13 @@ internal class Program
 {
     private static void Main(string[] args)
     {
-
+        Arquivo arquivo = new Arquivo("contas.txt");
         Banco bancoItalo = new Banco("Banco do Italo");
         Pix pix = new Pix();
         FluxoDeArquivo fluxoDeArquivo = new FluxoDeArquivo();
-        fluxoDeArquivo.abrirArquivoEmostrarArquivos(bancoItalo);
+        fluxoDeArquivo.abrirArquivoEmostrarArquivos(bancoItalo,arquivo);
+        
+
 
         exibirMenu();
 
@@ -84,6 +86,7 @@ internal class Program
                     Console.WriteLine("Digite 2 para remover usuario");
                     //Console.WriteLine("Digite 3 para alterar usuario");
                     Console.WriteLine("Digite 3 para exibir usuarios");
+                    Console.WriteLine("Digite 4 para salvar arquivo");
                     Console.WriteLine("Digite -1 para voltar");
                     Console.Write("\nInsira o numero: ");
                     string opcao = Console.ReadLine();
@@ -114,6 +117,9 @@ internal class Program
                             FuncoesMain.limparConsole();
                             exibirHeader();
                             bancoItalo.visualizarClientes();
+                            break;
+                        case 4:
+                            ManipulandoArquivo.salvandoArquivo(arquivo, bancoItalo);
                             break;
                         case -1:
                             menuTemp = -1;
